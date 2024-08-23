@@ -33,8 +33,8 @@ steps:
     python-version: '3.8.10'
 - uses: actions/download-artifact@v2
   with:
-name: my-trained-pipeline
-path: bikeshare_model/trained_models
+  name: my-trained-pipeline
+  path: bikeshare_model/trained_models
 - name: Install dependencies
   run: pip install -r requirements/test_requirements.txt
 - name: Test with pytest
@@ -77,12 +77,12 @@ path: bikeshare_model_api
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS_TOKEN }}
   run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 - name: Build the Docker image for Fastapi app
-env:
-DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
-run: docker build . -f Dockerfile -t $DOCKER_USER/bikeshare-fastapi:latest
+    env:
+    DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+    run: docker build . -f Dockerfile -t $DOCKER_USER/bikeshare-fastapi:latest
 - name: Push the Docker Image
-env:
-DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
-run: docker push $DOCKER_USER/bikeshare-fastapi
+    env:
+    DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+    run: docker push $DOCKER_USER/bikeshare-fastapi
 - name: Logout to Docker hub
 run: docker logout
