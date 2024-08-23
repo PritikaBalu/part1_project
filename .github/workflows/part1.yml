@@ -23,7 +23,8 @@ steps:
   path: bikeshare_model/trained_models/*.pkl
   retention-days: 1
 test:
-needs: train
+needs: 
+train:
 runs-on: ubuntu-latest
 steps:
 - uses: actions/checkout@v3
